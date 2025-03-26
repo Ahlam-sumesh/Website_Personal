@@ -4,22 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background: url('https://source.unsplash.com/1600x900/?wedding') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+        .content {
+            padding: 50px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .image-section {
+            margin: 30px 0;
+        }
+        .image-section img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .rsvp {
+            background: #fff3f3;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+        }
+        button {
+            background-color: pink;
+            cursor: pointer;
+        }
+@media (max-width: 768px) {
+    header {
+        font-size: 1.5em;
+        padding: 20px;
+    }
+    .content {
+        padding: 20px;
+    }
+    .image-section img {
+        width: 100%;
+        height: auto;
+    }
+    input, button {
+        width: 100%;
+    }
+}
+    </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="your-music-file.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
-    </audio>
-
-    <div class="container">
-        <h1>You're Invited to Our Wedding!</h1>
-        <p>Join us in celebrating our special day.</p>
-        <p>Date: <strong>December 25, 2025</strong></p>
+    <header>
+        <h1>You are Invited to Our Wedding!</h1>
+        <p>Join us for our special day</p>
+    </header>
+    
+    <div class="content">
+        <h2>Our Love Story</h2>
+        <p>It all started with a simple hello, and now we are here, ready to begin our forever.</p>
+        
+        <div class="image-section">
+            <img src="https://source.unsplash.com/600x400/?couple" alt="Our Journey">
+        </div>
+        
+        <h2>The Big Day</h2>
+        <p>Date: <strong>April 13, 2025</strong></p>
+        <p>Location: <strong>Grand Wedding Hall, City Name</strong></p>
         <p id="countdown"></p>
+        
+        <div class="image-section">
+            <img src="weddinghall.jpg" alt="Wedding Venue">
+        </div>
+        
+        <h2>RSVP Now</h2>
+        <div class="rsvp">
+            <input type="text" id="guestName" placeholder="Your Name">
+            <button onclick="submitRSVP()">Confirm Attendance</button>
+            <p id="rsvpMessage"></p>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function submitRSVP() {
+            let name = document.getElementById('guestName').value;
+            if (name) {
+                document.getElementById('rsvpMessage').innerText = `Thank you, ${name}! We can't wait to see you.`;
+            } else {
+                document.getElementById('rsvpMessage').innerText = "Please enter your name.";
+            }
+        }
+    </script>
+
+    <script> 
+        function updateCountdown() {
+            const weddingDate = new Date('2025-04-13T12:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = 
+                `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+        }
+setInterval(updateCountdown, 1000);
+
+    </script>
+
+
 </body>
 </html>
-
